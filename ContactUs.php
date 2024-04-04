@@ -1,0 +1,330 @@
+<?php
+//session_start();
+//error_reporting(0);
+//include('includes/config.php');
+$con = mysqli_connect('localhost','root','','project');
+    if(mysqli_connect_errno())
+    echo"Internal Server Error " .mysqli_connect_error();
+if(isset($_POST['submit']))
+  {
+$id=$_POST['id'];
+$name=$_POST['name'];
+$message=$_POST['Message'];
+$sql="INSERT INTO contactus VALUES('$id','$name','$message')";
+$query=mysqli_query($con,$sql);
+if($query){
+header("Location:index.php");}
+  }
+// if($sql)
+// {
+// $msg="Query Sent. We will contact you shortly";
+// }
+// else 
+// {
+// $error="Something went wrong. Please try again";
+// }
+
+
+?>
+<html>
+    <head>
+        <style>
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px;
+  background-color: #045de9;
+background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
+  animation: change 10s ease-in infinite;
+}
+
+@keyframes change{
+    0%{
+        background-position: 0 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0 50%;
+    }
+}
+.container{
+  max-width: 800px;
+  background: #fff;
+  width: 800px;
+  padding: 25px 40px 10px 40px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  border-radius: 50px;
+}
+.container .text{
+  text-align: center;
+  font-size: 35px;
+  font-weight: 600;
+  background: -webkit-linear-gradient(right, #ff0000, #001aff, #c401ff);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  
+}
+.container .text .background :hover { 
+    animation: spin 3s linear infinite;
+}
+
+
+.container form{
+  padding: 30px 0 0 0;
+}
+.container form .form-row{
+  display: flex;
+  margin: 32px 0;
+}
+form .form-row .input-data{
+  width: 100%;
+  height: 40px;
+  margin: 0 20px;
+  position: relative;
+}
+form .form-row .textarea{
+  height: 70px;
+}
+.input-data input,
+.textarea textarea{
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 17px;
+  border-bottom: 2px solid rgb(56, 47, 47);
+}
+.input-data input:focus ~ label, .textarea textarea:focus ~ label,
+.input-data input:valid ~ label, .textarea textarea:valid ~ label{
+  transform: translateY(-20px);
+  font-size: 14px;
+  color: #3498db;
+}
+.textarea textarea{
+  resize: none;
+  padding-top: 10px;
+}
+.input-data label{
+  position: absolute;
+  pointer-events: none;
+  bottom: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+.textarea label{
+  width: 100%;
+  bottom: 40px;
+  background: #fff;
+}
+.input-data .underline{
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+}
+.input-data .underline:before{
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: 100%;
+  background:  #0400ff;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.input-data input:focus ~ .underline:before,
+.input-data input:valid ~ .underline:before,
+.textarea textarea:focus ~ .underline:before,
+.textarea textarea:valid ~ .underline:before{
+  transform: scale(1);
+}
+.submit-btn .input-data{
+  overflow: hidden;
+  height: 45px!important;
+  width: 25%!important;
+}
+.submit-btn .input-data .inner{
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  right: -100%;
+  background: -webkit-linear-gradient(left, #ff0000 , #0400ff ,#00ff0d);
+  transition: all 0.7s;
+}
+button:hover:after .inner{
+  animation:spin 3s linear infinite;
+}
+@keyframes spin{
+    100%{
+        transform: rotate(360deg);
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 50% 0;
+ 
+    }
+}
+ .submit-btn .input-data:hover .inner{
+  left: 0; 
+  right: 0;
+} 
+.submit-btn .input-data input{
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 700px) {
+  .container .text{
+    font-size: 30px;
+  }
+  .container form{
+    padding: 10px 0 0 0;
+  }
+  .container form .form-row{
+    display: block;
+  }
+  form .form-row .input-data{
+    margin: 35px 0!important;
+  }
+  .submit-btn .input-data{
+    width: 40%!important;
+  }
+}
+
+.glow-on-hover {
+    width: 120px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    bottom: 10px;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+.head{
+  position: relative;
+  bottom: 300px;
+  right: 270px;
+}
+    </style>
+
+        </style>
+    </head>
+    <body>
+    <div class="head">
+   <a href="index.php">
+<button class="glow-on-hover" type="button"><-back
+</button>
+</a>
+     </div>
+    <div class="container">
+      <div class="text">
+         CONTACT US
+      </div>
+      <form action="#" method="post">
+        <input type="number" name="id" hidden>
+         <div class="form-row">
+            <div class="input-data">
+              
+               <input type="text" name="name" required>
+               <div class="underline"></div>
+               <label for="">Full name</label>
+            </div>
+         </div>
+         <div class="form-row">
+            <div class="input-data">
+               <input type="text" name="Message" required>
+               <div class="underline"></div>
+               <label for="">Message</label>
+            </div>
+         </div>
+         <!-- `		h<div class="form-row">
+         <div class="input-data textarea">
+            <textarea rows="8" cols="80" name="feedback" required></textarea>
+            <br />
+            <div class="underline"></div>
+            <label for="">FEEDBACK</label>
+            <br />-->
+            <div class="form-row submit-btn">
+               <div class="input-data">
+                  <div class="inner"></div>
+                  <input type="submit" name="submit" value="submit">
+               </div>
+            </div> 
+         </div>
+         </div></form>
+    </div>
+    </body>
+</html>
+      
